@@ -1,0 +1,111 @@
+<form [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div class="container signup-container">
+    <div class="row w-100">
+      <div class="col-md-6 form-section">
+        <h2 class="lightGreen">Create a free account</h2>
+        <p class="text-muted">
+          If you do not have an Account the Create your free account rigth
+          below..
+        </p>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="fullName"
+            placeholder="Your full name"
+          />
+          <div class="error-feedback" *ngIf="hasDisplayableError('fullName') && form.get('fullName')?.hasError('required')">
+            Please enter your Full Name
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Your e-mail address"
+            autocomplete="new-email"
+          />
+
+          <div class="error-feedback" *ngIf="hasDisplayableError('email')">
+            <ng-container [ngSwitch]="form.controls['email'].errors | firstKey">
+                <div *ngSwitchCase="'required'">
+                    Please enter your Email
+                  </div>
+                  <div *ngSwitchCase="'email'">
+                    Please enter a valid email address.
+                  </div>
+                  
+            </ng-container>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Enter your Password"
+            autocomplete="new-password"
+          />
+          <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+            <ng-container [ngSwitch]="form.controls['password'].errors | firstKey">
+                <div *ngSwitchCase="'required'">
+                    Please enter your Password
+                  </div>
+                  <div *ngSwitchCase="'minlength'">
+                    Password must be at least 6 characters.
+                  </div>
+                  <div *ngSwitchCase="'pattern'">
+                    Password must contain at least one special character.
+                  </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="confirmPassword"
+            placeholder="Re-enter your Password"
+          />
+          <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+          <ng-container [ngSwitch]="form.controls['confirmPassword'].errors | firstKey">
+            <div *ngSwitchCase="'required'">
+                Please enter your Password Again
+              </div>
+              <div *ngSwitchCase="'confirmPassword'">
+                Password must contain at least one special character.
+              </div>
+        </ng-container>
+          </div>
+        </div>
+        <button type="submit" class="btn signup-btn mt-3 darkGreen">
+          Sign up
+        </button>
+
+        <p class="link-text mt-3">
+          By signing up you agree to our <a href="#">Terms of Service</a> and
+          <a href="#">Privacy Policy</a>
+        </p>
+        <p class="link-text mt-2">
+          Already have an account? <a href="#">Login</a>
+        </p>
+      </div>
+
+      <div class="col-md-6 illustration">
+        <!-- Placeholder for illustration -->
+        <img
+          src="https://img.freepik.com/free-vector/library-concept-illustration_114360-2693.jpg?t=st=1731432594~exp=1731436194~hmac=77d6b78ef7c3b2e2725971d7e8cdb20ee379f243e2ddedd0e4bcfff8c38b6253&w=1380"
+          alt="Illustration"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+</form>
